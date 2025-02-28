@@ -101,10 +101,77 @@ app.post("/entry", (req:Request, res:Response) => {
 
 // [TASK 3] ====================================================================
 // Endpoint that returns a summary of a recipe that corresponds to a query name
-app.get("/summary", (req:Request, res:Request) => {
-  // TODO: implement me
-  res.status(500).send("not yet implemented!")
 
+// Helper function to determine the required ingredients and the total
+// cooking time
+const ingredientsAndCookTime = (entry: cookbookEntry): { ingredients: requiredItem[]; cookTime: number } => {
+  // Base case
+  if (entry.type === "ingredient") {
+    return {
+      ingredients: [{name: entry.name, quantity: 1}],
+      cookTime: (entry as ingredient).cookTime
+    };
+  }
+
+  const allIngredients: requiredItem[] = [];
+  let totalCookTime = 0;
+  
+  for (const requiredItem of (entry as recipe).requiredItems) {
+    // Check if the recipe contains recipes/ingredients not in the cookbook
+    const item = cookbook[requiredItem.name];
+    if (!item) {
+      throw new Error(`Required item ${requiredItem.name} not found in the cookbook.`);
+    }
+
+    // Recursive call to get the base ingredients of the required item and
+    // its total cook time
+    const { ingredients, cookTime } = ingredientsAndCookTime(item);
+
+    // Adjusts the quantity of the ingredient 
+    for (const ingredient of ingredients) {
+      const existingIngredient = allIngredients.find(i => i.name === ingredient.name);
+      if (!existingIngredient) {
+        allIngredients.push({
+          ...ingredient,
+          quantity: ingredient.quantity * requiredItem.quantity
+        });
+      } else {
+        existingIngredient.quantity += ingredient.quantity * requiredItem.quantity;
+      }
+    }
+
+    // Multiply the cook time of the sub item by its quantity and add
+    // it to the total cook time
+    totalCookTime += cookTime * requiredItem.quantity;
+  }
+
+  return { ingredients: allIngredients, cookTime: totalCookTime };
+};
+
+app.get("/summary", (req:Request, res:Request) => {
+  const name = req.query.name;
+  const recipe = cookbook[name];
+
+  // Recipe not found
+  if (!recipe) {
+    return res.status(400).json({ error: `Recipe '${name}' not found in cookbook` });
+  }
+
+  // Name does not refer to a recipe
+  if (recipe.type !== "recipe") {
+    return res.status(400).json({ error: `'${name}' is not a recipe` });
+  }
+
+  try {
+    const { ingredients, cookTime } = ingredientsAndCookTime(recipe);
+    return res.json({
+      name: recipe.name,
+      cookTime,
+      ingredients,
+    });
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
 });
 
 // =============================================================================
