@@ -45,8 +45,24 @@ app.post("/parse", (req:Request, res:Response) => {
 // [TASK 1] ====================================================================
 // Takes in a recipeName and returns it in a form that 
 const parse_handwriting = (recipeName: string): string | null => {
-  // TODO: implement me
-  return recipeName
+  if (recipeName.length <= 0) {
+    return null;
+  }
+
+  // Replaces all hyphens and underscores with a whitespace
+  recipeName = recipeName.replace(/[-_]/g, ' ');
+
+  // Removes all characters besides letters and whitespaces
+  recipeName = recipeName.replace(/[^A-Za-z ]/g, "");
+
+  // Converts the string to title case
+  recipeName = recipeName.toLowerCase().replace(/\b\w/g, l => l.toUpperCase());
+
+  // Squashes multiple spaces into a single space and 
+  // trims leading/trailing spaces
+  recipeName = recipeName.replace(/\s+/g, " ").trim();
+
+  return recipeName;
 }
 
 // [TASK 2] ====================================================================
