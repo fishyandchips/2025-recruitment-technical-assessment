@@ -26,7 +26,7 @@ const app = express();
 app.use(express.json());
 
 // Store your recipes here!
-const cookbook: any = null;
+const cookbook: { [name: string] : cookbookEntry } = {};
 
 // Task 1 helper (don't touch)
 app.post("/parse", (req:Request, res:Response) => {
@@ -68,9 +68,35 @@ const parse_handwriting = (recipeName: string): string | null => {
 // [TASK 2] ====================================================================
 // Endpoint that adds a CookbookEntry to your magical cookbook
 app.post("/entry", (req:Request, res:Response) => {
-  // TODO: implement me
-  res.status(500).send("not yet implemented!")
+  const entry = req.body;
 
+  // Type can only be recipe or ingredient
+  if (entry.type !== "recipe" && entry.type !== "ingredient") {
+    return res.status(400).json({ error: "Invalid type" });
+  }
+
+  // Cook time can only be greater than or equal to 0
+  if (entry.type === "ingredient" && entry.cookTime < 0) {
+    return res.status(400).json({ error: "Ingredient cook time must be greater than or equal to 0" });
+  }
+
+  // Entry names must be unique
+  if (cookbook[entry.name]) {
+    return res.status(400).json({ error: "Entry name is not unique" });
+  }
+
+  // Required items for a recipe can only have one element per name
+  if (entry.type === "recipe") {
+    const requiredItemNames = entry.requiredItems.map((item: { name: string }) => item.name);
+    const uniqueRequiredItems = new Set(requiredItemNames);
+    if (requiredItemNames.length !== uniqueRequiredItems.size) {
+      return res.status(400).json({ error: "Recipe requiredItems must have unique names" });
+    }
+  }
+
+  cookbook[entry.name] = entry;
+
+  res.status(200).send();
 });
 
 // [TASK 3] ====================================================================
