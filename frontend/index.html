@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freerooms</title>
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+</head>
+<body>
+  <div id="top-nav-bar">
+    <div id="logo-container">
+      <img src="assets/freeRoomsLogo.png" alt="Freerooms Logo" id="logo">
+      <span>Freerooms</span>
+    </div>
+    <nav>
+      <div>
+        <span class="material-symbols-outlined">search</span>
+      </div>
+      <div>
+        <span class="material-symbols-outlined">grid_view</span>
+      </div>
+      <div>
+        <span class="material-symbols-outlined">map</span>
+      </div>
+      <div>
+        <span class="material-symbols-outlined">dark_mode</span>
+      </div>
+    </nav>
+  </div>
+
+  <main>
+    <div id="search-filters">
+      <div id="filters">
+        <span class="material-symbols-outlined">filter_alt</span>
+        <span>Filters</span>
+      </div>
+      
+      <div id="search-container">
+        <span class="material-symbols-outlined">search</span>
+        <input type="search" placeholder="Search for a building..." id="search">
+      </div>
+  
+      <div id="filters">
+        <span class="material-symbols-outlined">filter_list</span>
+        <span>Sort</span>
+      </div>
+    </div>
+  
+    <div id="building-list">
+      <div class="building-container">
+        <div class="building-availability">
+          <div class="is-available"></div>
+          <span>9 rooms available</span>
+        </div>
+        <div class="building-name">AGSM</div>
+      </div>
+  
+      <div class="building-container">
+        <div class="building-availability">
+          <div class="is-available"></div>
+          <span>16 rooms available</span>
+        </div>
+        <div class="building-name">Ainsworth Building</div>
+      </div>
+  
+      <div class="building-container">
+        <div class="building-availability">
+          <div class="is-available"></div>
+          <span>44 rooms available</span>
+        </div>
+        <div class="building-name">Anita B Lawrence Centre</div>
+      </div>
+  
+      <div class="building-container">
+        <div class="building-availability">
+          <div class="is-available"></div>
+          <span>6 rooms available</span>
+        </div>
+        <div class="building-name">Biological Sciences</div>
+      </div>
+  
+      <div class="building-container">
+        <div class="building-availability">
+          <div class="is-available"></div>
+          <span>8 rooms available</span>
+        </div>
+        <div class="building-name">Biological Sciences (West)</div>
+      </div>
+  
+      <div class="building-container">
+        <div class="building-availability">
+          <div class="is-available"></div>
+          <span>42 rooms available</span>
+        </div>
+        <div class="building-name">Blockhouse</div>
+      </div>
+
+      <div class="building-container">
+        <div class="building-availability">
+          <div class="is-available"></div>
+          <span>18 rooms available</span>
+        </div>
+        <div class="building-name">Business School</div>
+      </div>
+
+      <div class="building-container">
+        <div class="building-availability">
+          <div class="is-available"></div>
+          <span>8 rooms available</span>
+        </div>
+        <div class="building-name">Civil Engineering Building</div>
+      </div>
+
+      <div class="building-container">
+        <div class="building-availability">
+          <div class="is-available"></div>
+          <span>5 rooms available</span>
+        </div>
+        <div class="building-name">Colombo Building</div>
+      </div>
+
+      <div class="building-container">
+        <div class="building-availability">
+          <div class="is-available"></div>
+          <span>7 rooms available</span>
+        </div>
+        <div class="building-name">Computer Science & Eng (K17)</div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const logo = document.getElementById('logo');
+    let isOpen = true;
+
+    logo.addEventListener('click', () => {
+      if (isOpen) {
+        logo.src = 'assets/freeroomsDoorClosed.png';
+      } else {
+        logo.src = 'assets/freeRoomsLogo.png';
+      }
+
+      isOpen = !isOpen;
+    });
+  </script>
+</body>
+</html>

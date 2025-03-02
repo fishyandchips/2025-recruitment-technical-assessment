@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat';
+}
+
+#top-nav-bar {
+  width: 100%;
+  height: 8vh;
+  padding: 20px;
+  position: fixed;
+  border-bottom: 2px solid rgb(224, 224, 224); 
+  font-size: 4vh;
+  font-weight: bold;
+  color: rgb(224, 115, 45);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  top: 0;
+  z-index: 5;
+  background-color: white;
+}
+
+nav {
+  display: flex;
+  gap: 16px;
+  height: 100%;
+}
+
+nav div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgb(239, 185, 149);
+  border-radius: 7px;
+  aspect-ratio: 1;
+}
+
+nav div:hover {
+  background-color: rgb(224, 115, 45);
+  color: white;
+  cursor: pointer;
+}
+
+nav .material-symbols-outlined {
+  font-size: 3vh;
+}
+
+main {
+  padding: 33px 48px;
+}
+
+#logo-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+#logo {
+  height: 100%;
+}
+
+#logo:hover {
+  cursor: pointer;
+}
+
+#search-filters {
+  margin-top: 128px;
+  margin-bottom: 33px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 72px;
+}
+
+#building-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#filters {
+	color: rgb(224, 115, 45);
+	padding: 20px;
+	width: 280px;
+  height: 88px;
+	font-size: 2rem;
+  font-weight: bold;
+  border: 4px solid rgb(224, 115, 45);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+}
+
+#filters:hover {
+  background-color:rgb(224, 115, 45);
+  color: white;
+  cursor: pointer;
+}
+
+#search-filters .material-symbols-outlined {
+  font-size: 40px;
+  margin-left: 30px;
+  margin-right: 20px;
+}
+
+#search-container {
+  flex: 1;
+  height: 88px;
+  border: 2px solid rgb(196, 196, 196);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+
+#search {
+  font-size: 2rem;
+  border: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+#search:focus {
+  outline: none;
+}
+
+#search::-webkit-search-cancel-button {
+  display: none;
+}
+
+#building-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 40px;
+  column-gap: 20px;
+}
+
+.building-container {
+  width: calc(50% - 20px);
+  height: 400px;
+  border-radius: 15px;
+  position: relative;
+  background-color: red;
+  padding: 20px;
+  background-size: cover;
+  background-position-y: -50px;
+}
+
+.is-available {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgb(103, 172, 92);
+  margin-right: 20px;
+}
+
+.building-availability {
+  width: calc(50% - 40px);
+  background-color: white;
+  padding: 28px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  white-space: nowrap;
+  width: min-content;
+  position: absolute;
+  color: black;
+  top: 20px;
+  right: 20px;
+  border-radius: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.building-name {
+  width: calc(100% - 40px);
+  background-color: rgb(224, 115, 45);
+  padding: 40px;
+  font-size: 2rem;
+  position: absolute;
+  color: white;
+  bottom: 20px;
+  border-radius: 16px;
+}
+
+.building-container:nth-child(1) {
+  background-image: url('assets/agsm.webp');
+}
+
+.building-container:nth-child(2) {
+  background-image: url('assets/ainsworth.webp');
+}
+
+.building-container:nth-child(3) {
+  background-image: url('assets/anitab.webp');
+}
+
+.building-container:nth-child(4) {
+  background-image: url('assets/biologicalScience.webp');
+}
+
+.building-container:nth-child(5) {
+  background-image: url('assets/biologicalScienceWest.webp');
+}
+
+.building-container:nth-child(6) {
+  background-image: url('assets/blockhouse.webp');
+}
+
+.building-container:nth-child(7) {
+  background-image: url('assets/businessSchool.webp');
+}
+
+.building-container:nth-child(8) {
+  background-image: url('assets/civilBuilding.webp');
+}
+
+.building-container:nth-child(9) {
+  background-image: url('assets/colombo.webp');
+}
+
+.building-container:nth-child(10) {
+  background-image: url('assets/cseBuilding.webp');
+}
+
+@media (min-aspect-ratio: 1.5/1) {
+  .building-container {
+    width: calc(20% - 20px);
+    height: 40vh;
+  }
+
+  .is-available {
+    width: 10px;
+    height: 10px;
+    margin-right: 15px;
+  }
+  
+  .building-availability {
+    padding: 20px;
+    font-size: 1rem;
+  }
+  
+  .building-name {
+    padding: 20px;
+    font-size: 1.5rem;
+  }
+}
